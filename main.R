@@ -3,8 +3,8 @@ path <- function(x) normalizePath(file.path(getwd(), x))
 withr::with_envvar(
   c(
     PKG_CXXFLAGS = glue::glue('-I"{folder}"', folder = path("nlopt/osx/include")),
-    CXX_STD = "CXX11",
-    PKG_LIBS = glue::glue('-L"{folder}" -lnlopt_cxx', folder = path("nlopt/osx/lib"))
+    # CXX_STD = "CXX11",
+    PKG_LIBS = glue::glue('-L"{folder}" -lnlopt -lm', folder = path("nlopt/osx/lib"))
   ),
   Rcpp::sourceCpp('main.cpp', verbose = FALSE, rebuild = TRUE)
 )
